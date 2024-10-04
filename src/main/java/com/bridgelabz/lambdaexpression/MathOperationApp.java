@@ -1,8 +1,11 @@
 package com.bridgelabz.lambdaexpression;
 
-interface IMathFunction
-{
+interface IMathFunction {
     int calculate(int a, int b);
+
+    static void printResult(int a, int b, String functionName, IMathFunction mathFunction) {
+        System.out.println(functionName + " of " + a + " and " + b + " is: " + mathFunction.calculate(a, b));
+    }
 }
 
 public class MathOperationApp {
@@ -12,9 +15,9 @@ public class MathOperationApp {
         IMathFunction multiply = (x,y) -> x*y;
         IMathFunction divide = (x,y) -> x/y;
 
-        System.out.println("Addition is : "+add.calculate(5,4));
-        System.out.println("Addition is : "+substract.calculate(5,4));
-        System.out.println("Addition is : "+multiply.calculate(5,4));
-        System.out.println("Addition is : "+divide.calculate(5,4));
+        IMathFunction.printResult(5,4,"Addition",add);
+        IMathFunction.printResult(5,4,"Substraction",substract);
+        IMathFunction.printResult(5,4,"Multiply",multiply);
+        IMathFunction.printResult(5,4,"Divide",divide);
     }
 }
