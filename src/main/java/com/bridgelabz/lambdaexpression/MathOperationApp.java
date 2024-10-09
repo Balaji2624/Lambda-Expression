@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 class NumberPlayList {
 
@@ -14,12 +15,12 @@ class NumberPlayList {
         numberList.add(number);
     }
 
-    // Refactor to use Function interface for conversion
-    public void iterateWithConversion(Function<Integer, Double> converter) {
-        // Using forEach with conversion logic
+    // Refactor to use Predicate interface for filtering even numbers
+    public void iterateAndPrintEven(Predicate<Integer> filter) {
         numberList.forEach(number -> {
-            Double convertedNumber = converter.apply(number); // Convert number to double
-            System.out.println("Converted iteration: " + convertedNumber); // Print the converted number
+            if (filter.test(number)) { // Check if the number is even using Predicate
+                System.out.println("Even number: " + number); // Print the number only if it's even
+            }
         });
     }
 
@@ -53,25 +54,26 @@ public class MathOperationApp {
         NumberPlayList numberPlayList = new NumberPlayList();
 
         numberPlayList.addNumber(10);
-        numberPlayList.addNumber(20);
+        numberPlayList.addNumber(21);
         numberPlayList.addNumber(30);
-        numberPlayList.addNumber(40);
+        numberPlayList.addNumber(41);
 
-        System.out.println("Iteration with conversion to double:");
-        // Use a lambda expression to convert Integer to Double by doubling the value
-        numberPlayList.iterateWithConversion(number -> number.doubleValue());
+        System.out.println("Iteration and print only even numbers:");
+        // Use a lambda expression with Predicate to filter even numbers
+        numberPlayList.iterateAndPrintEven(number -> number % 2 == 0);
 
         // If you want to demonstrate class, anonymous class, and lambda again, you can uncomment the following lines:
 
-         System.out.println("\nIteration using Class:");
-         numberPlayList.iterateUsingClass();
+        System.out.println("\nIteration using Class:");
+        numberPlayList.iterateUsingClass();
 
-         System.out.println("\nIteration using Anonymous Class:");
-         numberPlayList.iterateUsingAnonymousClass();
+        System.out.println("\nIteration using Anonymous Class:");
+        numberPlayList.iterateUsingAnonymousClass();
 
-         System.out.println("\nIteration using Lambda:");
-         numberPlayList.iterateUsingLambda();
+        System.out.println("\nIteration using Lambda:");
+        numberPlayList.iterateUsingLambda();
     }
 }
+
 
 
